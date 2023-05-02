@@ -12,48 +12,59 @@ class MyWindow(QMainWindow, form_class):
         self.flag_dol = True
         
         self.arr2D=[
-            [0,0,0,0,0, 0,0,0,0,0],
-            [0,0,0,0,0, 0,0,0,0,0],
-            [0,0,0,0,0, 0,0,0,0,0],
-            [0,0,0,0,0, 0,0,0,0,0],
-            [0,0,0,0,0, 0,0,0,0,0],
+            [0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0],
+            [0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0],
+            [0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0],
+            [0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0],
+            [0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0],
             
-            [0,0,0,0,0, 0,0,0,0,0],
-            [0,0,0,0,0, 0,0,0,0,0],
-            [0,0,0,0,0, 0,0,0,0,0],
-            [0,0,0,0,0, 0,0,0,0,0],
-            [0,0,0,0,0, 0,0,0,0,0]
+            [0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0],
+            [0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0],
+            [0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0],
+            [0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0],
+            [0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0],
+            
+            [0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0],
+            [0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0],
+            [0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0],
+            [0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0],
+            [0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0],
+            
+            [0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0],
+            [0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0],
+            [0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0],
+            [0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0]
         ]
         self.pbs=[]
         
         self.setupUi(self)
         self.pb.clicked.connect(self.myclick)
-        
-        for i in range(10):
-            for j in range(10):
+
+        for i in range(19):
+            for j in range(19):
                 temp = QPushButton('', self)
                 temp.setToolTip("{},{}".format(i,j))
                 temp.setIcon(QIcon("0.png"))
-                temp.setIconSize(QSize(40, 40))
-                temp.setGeometry(j*40, i*40, 40, 40)
+                temp.setIconSize(QSize(36, 36))
+                temp.setGeometry(j*36, i*36, 36, 36)
                 temp.clicked.connect(self.myclick)
                 self.pbs.append(temp)
                 
         self.myrender()
                 
     def myrender(self):
-        for i in range(10):
-            for j in range(10):
+        for i in range(19):
+            for j in range(19):
                 if self.arr2D[i][j] == 0:
-                    self.pbs[i*10+j].setIcon(QIcon("0.png"))       
+                    self.pbs[i*19+j].setIcon(QIcon("0.png"))       
                 if self.arr2D[i][j] == 1:
-                    self.pbs[i*10+j].setIcon(QIcon("1.png"))   
+                    self.pbs[i*19+j].setIcon(QIcon("1.png"))   
                 if self.arr2D[i][j] == 2:
-                    self.pbs[i*10+j].setIcon(QIcon("2.png"))   
+                    self.pbs[i*19+j].setIcon(QIcon("2.png"))   
    
     def myreset(self):
-        for i in range(10):
-            for j in range(10):
+        for i in range(19):
+            for j in range(19):
                 self.arr2D[i][j]=0
         self.myrender()
         self.flag_dol = True
