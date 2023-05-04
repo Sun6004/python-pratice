@@ -21,4 +21,8 @@ from .import view
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('hello', view.hello, name='hello'),
+    path('param', view.param),
+    path('post', view.post),
+    path('forw', view.forw),
+    path('emp', view.emp),
 ]
