@@ -3,13 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+	function fn_add(){
+		location.href = "emp_add"
+	}
+</script>
 </head>
 <body>
-	<h3> 사원 리스트</h3>
+	<h3> EMP LIST</h3>
 	 <table border="1">
         <thead>
             <tr>
-                <th>ID</th>
+                <th>사번</th>
                 <th>이름</th>
                 <th>성별</th>
                 <th>주소</th>
@@ -18,7 +23,7 @@
         <tbody>
             {% for emp in list %}
                 <tr>
-                    <td>{{ emp.e_id }}</td>
+                    <td> <a href="emp_detail?e_id={{ emp.e_id }}">{{ emp.e_id }}</a></td>
                     <td>{{ emp.e_name }}</td>
                     <td>{{ emp.sex }}</td>
                     <td>{{ emp.addr }}</td>
@@ -26,5 +31,6 @@
             {% endfor %}
         </tbody>
     </table>
+    <input type="button" value="추가" onclick="fn_add()">
 </body>
 </html>

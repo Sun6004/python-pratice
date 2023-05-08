@@ -29,15 +29,16 @@ class DaoEmp:
         self.curs.close()
         self.conn.close()
         
-    def insert(self):
+    def insert(self, e_id, e_name, sex, addr):
         sql = """INSERT INTO emp
                     (e_id, e_name, sex, addr)
                  VALUES
                      (%s,%s,%s,%s)"""
-        self.curs.execute(sql, ('9','9','9','9'))
+        self.curs.execute(sql, (e_id, e_name, sex, addr))
         self.conn.commit()  # 데이터베이스에 변경 내용 반영
         cnt = self.curs.rowcount  # 삽입된 행 수를 반환
-        return cnt           
+        return cnt
+        
     
     def delete(self, e_id):
         sql = "DELETE from emp where e_id=%s;"

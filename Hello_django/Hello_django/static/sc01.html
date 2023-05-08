@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	function btn(){
+		//document.querySelector(".my_div").innerHTML = "Good night";
+		var objs = document.getElementsByClassName("my_div");
+		objs[0].innerText = "Good evening";
+		console.log(objs[0]);
+	}
+	
+</script>
+</head>
+<body>
+	<div class="my_div">Good morning</div>
+	<input type="button" value="Click" onclick="btn()">
+</body>
+</html>

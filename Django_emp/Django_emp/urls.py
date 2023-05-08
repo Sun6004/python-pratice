@@ -19,6 +19,12 @@ from django.urls import path
 from Django_emp import view
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('emp', view.emp),
+    path('emp_list', view.emp),
+    path('emp_detail', view.emp_detail),
+    path('emp_mod', view.emp_mod),
+    path('emp_add', view.emp_add),
+    path('emp_mod_act', view.emp_mod_act),
+    path('emp_add_act', view.emp_add_act),
+    path('emp_del_act', view.emp_del_act),
+    path('', view.emp),
 ]

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	function myClick(){
+		var rd = Math.floor(Math.random()*3);
+	}
+	
+</script>
+</head>
+<body>
+	<table border="1">
+		<tr>
+			<td>나: </td>
+			<td>
+			<input type="text" name="it_mine">
+			</td>
+		</tr>
+		<tr>
+			<td>Com: </td>
+			<td>
+			<input type="text" name="it_com">
+			</td>
+		</tr>
+		<tr>
+			<td>result: </td>
+			<td>
+			<input type="text" name="it_result">
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+			<input type="button" value="게임하기" onclick="myClick()">
+			</td>
+		</tr>
+	</table>
+</body>
+</html>
