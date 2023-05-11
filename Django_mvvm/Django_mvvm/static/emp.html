@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="jquery-3.6.4.js"></script>
+<script type="text/javascript">
+	function fn_ajax() {
+		var param = {
+			menu : '짬뽕'
+		}
+
+		$.ajax({
+			type : "POST",
+			url : "/ajax",
+			data : JSON.stringify(param),
+			dataType : "json",
+			contentType : "application/x-www-form-urlencoded;charset=UTF-8",
+			success : function(res) {
+				console.log(res);
+			}
+		});
+	}
+	
+	function fn_list() {
+		$.ajax({
+			type : "POST",
+			url : "/ajax_emp_list",
+			dataType : "json",
+			contentType : "application/x-www-form-urlencoded;charset=UTF-8",
+			success : function(res) {
+				var list = res.list;
+				var obj_tbody = document.querySelector("#tbody");
+				
+				var txt = "";
+				
+				for(var i =0; i<list.length; i++){
+					var e = list[i];
+					var e_id = e.e_id;
+					var e_name = e.e_name;
+					var sex = e.sex;
+					var addr = e.addr;
+					txt += `
+						<tr>
+							<td><a href="javascript:fn_detail('${e_id}')">${e_id}</a></td>
+							<td>${e_name}</td>
+							<td>${sex}</td>
+							<td>${addr}</td>
+						</tr>
+					`;
+				}
+				obj_tbody.innerHTML = txt;
+			}
+			
+		});
+	}
+	function fn_detail(e_id){
+		$.ajax({
+			type : "POST",
+			url : "/ajax_emp_detail",
+			data : { "e_id": e_id },
+			dataType : "json",
+			contentType : "application/x-www-form-urlencoded;charset=UTF-8",
+			success : function(res) {	
+				var vo = res.vo;
+				var obj_e_id = document.querySelector("#e_id");
+				var obj_e_name = document.querySelector("#e_name");
+				var obj_sex = document.querySelector("#sex");
+				var obj_addr = document.querySelector("#addr");
+				
+				obj_e_id.value = vo.e_id;
+				obj_e_name.value = vo.e_name;
+				obj_sex.value = vo.sex;
+				obj_addr.value = vo.addr;
+				
+			}
+		})
+	}
+	
+	function fn_mod(){
+		$.ajax({
+			type : "POST",
+			url : "/ajax_emp_update",
+			data : {
+			    "e_id": document.querySelector("#e_id").value,
+			    "e_name": document.querySelector("#e_name").value,
+			    "sex": document.querySelector("#sex").value,
+			    "addr": document.querySelector("#addr").value
+			},
+			dataType : "json",
+			contentType : "application/x-www-form-urlencoded;charset=UTF-8",
+			success : function(res) {	
+				alert("성공적으로 수정되었습니다.");
+				location.reload();
+			}
+		})
+	}
+</script>
+<title>Insert title here</title>
+</head>
+<body onload="fn_list()">
+	<table border="1">
+		<thead>
+			<tr>
+				<td>사번</td>
+				<td>이름</td>
+				<td>성별</td>
+				<td>주소</td>
+			</tr>
+		</thead>
+		<tbody id="tbody">
+			<tr>
+				<td colspan="4">검색된 데이터가 없습니다.</td>
+			</tr>
+		</tbody>
+	</table>
+	<hr>
+	<h4>Detail</h4>
+	<table border="1">
+		<tr>
+			<td>사번</td>
+			<td>
+				<input type="text" id="e_id">
+			</td>
+		</tr>
+		<tr>
+			<td>이름</td>
+			<td>
+				<input type="text" id="e_name">
+			</td>
+		</tr>
+		<tr>
+			<td>성별</td>
+			<td>
+				<input type="text" id="sex">
+			</td>
+		</tr>
+		<tr>
+			<td>주소</td>
+			<td>
+				<input type="text" id="addr">
+			</td>
+		</tr>
+		
+		<tr>
+			<td colspan="2"> 
+				<input type="button" value="추가">
+				<input type="button" value="수정" onclick="fn_mod()">
+				<input type="button" value="삭제">
+				
+			</td>
+		</tr>
+	</table>
+</body>
+</html>
