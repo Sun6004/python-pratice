@@ -26,4 +26,6 @@ urlpatterns = [
     path('ajax_emp_list', view.ajax_emp_list),
     path('ajax_emp_detail', view.ajax_emp_detail),
     path('ajax_emp_update', view.ajax_emp_update),
+    path('ajax_emp_delete', view.ajax_emp_delete),
+    path('ajax_emp_insert', view.ajax_emp_insert),
 ]

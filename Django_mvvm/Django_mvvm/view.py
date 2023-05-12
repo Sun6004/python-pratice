@@ -52,3 +52,28 @@ def ajax_emp_update(request):
         'cnt': cnt
         }
     return JsonResponse(context)
+
+@csrf_exempt
+def ajax_emp_delete(request):
+    e_id = request.POST['e_id']
+    
+    dao = DaoEmp()
+    cnt = dao.delete(e_id)
+    context = {
+        'cnt': cnt
+        }
+    return JsonResponse(context)
+
+@csrf_exempt
+def ajax_emp_insert(request):
+    e_id = request.POST['e_id']
+    e_name = request.POST['e_name']    
+    sex = request.POST['sex']
+    addr = request.POST['addr'] 
+    
+    dao = DaoEmp()
+    cnt = dao.insert(e_id, e_name, sex, addr);
+    context = {
+        'cnt': cnt
+        }
+    return JsonResponse(context)

@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <script src="jquery-3.6.4.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script type="text/javascript">
 	function fn_ajax() {
 		var param = {
@@ -41,7 +42,7 @@
 					var addr = e.addr;
 					txt += `
 						<tr>
-							<td><a href="javascript:fn_detail('${e_id}')">${e_id}</a></td>
+							<td> <a href="javascript:fn_detail('${e_id}')">${e_id}</a> </td>
 							<td>${e_name}</td>
 							<td>${sex}</td>
 							<td>${addr}</td>
@@ -89,16 +90,55 @@
 			dataType : "json",
 			contentType : "application/x-www-form-urlencoded;charset=UTF-8",
 			success : function(res) {	
-				alert("성공적으로 수정되었습니다.");
-				location.reload();
+				Swal.fire('승인이 완료되었습니다.', '화끈하시네요~!', 'success');
+			}
+		})
+	}
+	
+	function fn_del(){
+		$.ajax({
+			type : "POST",
+			url : "/ajax_emp_delete",
+			data : { "e_id": document.querySelector("#e_id").value },
+			dataType : "json",
+			contentType : "application/x-www-form-urlencoded;charset=UTF-8",
+			success : function(res) {	
+				alert("성공적으로 삭제되었습니다.");
+			}
+		})
+	}
+	
+	function fn_add(){
+		$.ajax({
+			type : "POST",
+			url : "/ajax_emp_insert",
+			data : {
+			    "e_id": document.querySelector("#e_id").value,
+			    "e_name": document.querySelector("#e_name").value,
+			    "sex": document.querySelector("#sex").value,
+			    "addr": document.querySelector("#addr").value
+			},
+			dataType : "json",
+			contentType : "application/x-www-form-urlencoded;charset=UTF-8",
+			success : function(res) {	
+				alert("성공적으로 추가되었습니다.");
 			}
 		})
 	}
 </script>
+<style type="text/css">
+.btn{
+	width: 31%;
+}
+
+#t1{
+	width: 300px;
+}
+</style>
 <title>Insert title here</title>
 </head>
 <body onload="fn_list()">
-	<table border="1">
+	<table border="1" id="t1">
 		<thead>
 			<tr>
 				<td>사번</td>
@@ -114,7 +154,7 @@
 		</tbody>
 	</table>
 	<hr>
-	<h4>Detail</h4>
+	<h3>Detail</h3>
 	<table border="1">
 		<tr>
 			<td>사번</td>
@@ -143,9 +183,9 @@
 		
 		<tr>
 			<td colspan="2"> 
-				<input type="button" value="추가">
-				<input type="button" value="수정" onclick="fn_mod()">
-				<input type="button" value="삭제">
+				<input type="button" value="추가" onclick="fn_add()" class="btn">
+				<input type="button" value="수정" onclick="fn_mod()" class="btn">
+				<input type="button" value="삭제" onclick="fn_del()" class="btn">
 				
 			</td>
 		</tr>
