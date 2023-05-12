@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	class Block{
+		constructor(){
+			this.type = 2;
+			this.status = 1;
+			this.i = 3;
+			this.j = 2;
+		}
+	}
+	var b = new Block();
+	
+	var block2D = [
+		[0,0,0,0,0, 0,0,0,0,0],
+		[0,0,0,0,0, 0,0,0,0,0],
+		[0,0,0,0,0, 0,0,0,0,0],
+		[0,0,0,0,0, 0,0,0,0,0],
+		[0,0,0,0,0, 0,0,0,0,0],
+		
+		[0,0,0,0,0, 0,0,0,0,0],
+		[0,0,0,0,0, 0,0,0,0,0],
+		[0,0,0,0,0, 0,0,0,0,0],
+		[0,0,0,0,0, 0,0,0,0,0],
+		[0,0,0,0,0, 0,0,0,0,0]
+	];
+		
+	function setBlock2D(){
+		for(var i=0; i<10; i++){
+			for(var j =0; j<10; j++){
+				block2D[i][j]=0;
+			}
+		}
+		if(b.type ==1){			
+			block2D[b.i]	[b.j] 	= b.type;
+			block2D[b.i]	[b.j+1] = b.type;
+			block2D[b.i+1]	[b.j] 	= b.type;
+			block2D[b.i+1]	[b.j+1] = b.type;
+		}
+		
+		if(b.type ==2){	
+			if(b.status==1){				
+				block2D[b.i]	[b.j] 	= b.type;
+				block2D[b.i-1]	[b.j] = b.type;
+				block2D[b.i-2]	[b.j] 	= b.type;
+				block2D[b.i+1]	[b.j] = b.type;
+			}else if(b.status == 0){
+				block2D[b.i]	[b.j] 	= b.type;
+				block2D[b.i]	[b.j-1] = b.type;
+				block2D[b.i]	[b.j-2] = b.type;
+				block2D[b.i]	[b.j+1] = b.type;
+			}
+		}
+	}	
+	
+	function my_render(){
+		var tiles = document.querySelectorAll('.tile');
+		
+		for(var i=0; i<10; i++){
+			for(var j =0; j<10; j++){
+				if(block2D[i][j] == 0){
+					tiles[i*10+j].bgColor = "white";
+				}if(block2D[i][j] == 1){
+					tiles[i*10+j].bgColor = "blue";					
+				}
+				if(block2D[i][j] == 2){
+					tiles[i*10+j].bgColor = "green";					
+				}
+			}
+		}
+	}
+	
+	function rotate(){
+		if(b.type ==1){
+			
+		}else if(b.type == 2 || b.type == 3 || b.type == 4){
+			if(b.status==0){
+				b.status=1;
+			}else if(b.status==1){
+				b.status=0;
+			}
+		}else if(b.type == 5 || b.type == 6 || b.type == 7){
+			if(b.status==0){
+				b.status=1;
+			}else if(b.status==1){
+				b.status=2;
+			}else if(b.status==2){
+				b.status=3;
+			}else if(b.status==3){
+				b.status=0;
+			}
+		}
+	}
+	
+	function myclick(e){
+		
+		var code = e.code;
+		if(code=="ArrowUp"){
+			b.i --;
+		}
+		if(code=="ArrowDown"){
+			b.i ++;
+		}
+		if(code=="ArrowLeft"){
+			b.j --;
+		}
+		if(code=="ArrowRight"){
+			b.j ++;
+		}
+		if(code=="Space"){
+			rotate();
+		}
+		setBlock2D();
+		my_render();
+	}
+	window.addEventListener("keydown", (e) =>
+		myclick(e)
+	);
+	
+	
+</script>
+<style type="text/css">
+
+.tile{
+	width: 20px;
+	height: 20px;
+}
+</style>
+</head>
+<body>
+	TETRIS 
+	<a href="javascript:setBlock2D()">call </a> <br>
+	<a href="javascript:my_render()">render </a>
+	<hr> <br>
+	<table border="1">
+		<tr>
+			<td class="tile"></td><td class="tile"></td><td class="tile"></td><td class="tile"></td><td class="tile"></td>
+			<td class="tile"></td><td class="tile"></td><td class="tile"></td><td class="tile"></td><td class="tile"></td>
+		</tr>
+		<tr>
+			<td class="tile"></td><td class="tile"></td><td class="tile"></td><td class="tile"></td><td class="tile"></td>
+			<td class="tile"></td><td class="tile"></td><td class="tile"></td><td class="tile"></td><td class="tile"></td>
+		</tr>
+		<tr>
+			<td class="tile"></td><td class="tile"></td><td class="tile"></td><td class="tile"></td><td class="tile"></td>
+			<td class="tile"></td><td class="tile"></td><td class="tile"></td><td class="tile"></td><td class="tile"></td>
+		</tr>
+		<tr>
+			<td class="tile"></td><td class="tile"></td><td class="tile"></td><td class="tile"></td><td class="tile"></td>
+			<td class="tile"></td><td class="tile"></td><td class="tile"></td><td class="tile"></td><td class="tile"></td>
+		</tr>
+		<tr>
+			<td class="tile"></td><td class="tile"></td><td class="tile"></td><td class="tile"></td><td class="tile"></td>
+			<td class="tile"></td><td class="tile"></td><td class="tile"></td><td class="tile"></td><td class="tile"></td>
+		</tr>
+		<tr>
+			<td class="tile"></td><td class="tile"></td><td class="tile"></td><td class="tile"></td><td class="tile"></td>
+			<td class="tile"></td><td class="tile"></td><td class="tile"></td><td class="tile"></td><td class="tile"></td>
+		</tr>
+		<tr>
+			<td class="tile"></td><td class="tile"></td><td class="tile"></td><td class="tile"></td><td class="tile"></td>
+			<td class="tile"></td><td class="tile"></td><td class="tile"></td><td class="tile"></td><td class="tile"></td>
+		</tr>
+		<tr>
+			<td class="tile"></td><td class="tile"></td><td class="tile"></td><td class="tile"></td><td class="tile"></td>
+			<td class="tile"></td><td class="tile"></td><td class="tile"></td><td class="tile"></td><td class="tile"></td>
+		</tr>
+		<tr>
+			<td class="tile"></td><td class="tile"></td><td class="tile"></td><td class="tile"></td><td class="tile"></td>
+			<td class="tile"></td><td class="tile"></td><td class="tile"></td><td class="tile"></td><td class="tile"></td>
+		</tr>
+		<tr>
+			<td class="tile"></td><td class="tile"></td><td class="tile"></td><td class="tile"></td><td class="tile"></td>
+			<td class="tile"></td><td class="tile"></td><td class="tile"></td><td class="tile"></td><td class="tile"></td>
+		</tr>
+		
+	</table>
+</body>
+</html>
